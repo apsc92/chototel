@@ -4,8 +4,10 @@ class CreateContacts < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :institute
       t.string :category
+      t.references :user
+      t.references :territory
       t.boolean :meeting_done, default: false
-      t.integer :order_booked
+      t.integer :order_booked, default: 0
       t.timestamps
     end
   end
