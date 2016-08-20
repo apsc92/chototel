@@ -1,17 +1,24 @@
-.table-responsive
-  %table.table.table-striped
-    %thead
-      %tr
-        %th #
-        %th Territory
-        %th Order Booked
-        %th Order Target
-        %th Performance(%)
-    %tbody
-      -@territories.each.with_index do |territory, index|
-        %tr
-          %td= index+1
-          %td= territory.name
-          %td= @orders_booked[index+1] ? @orders_booked[index+1] : 'No Users'
-          %td= @order_targets[index+1] ? @order_targets[index+1] : 'No Users'
-          %td= @order_targets[index+1] ? @orders_booked[index+1] ? (@orders_booked[index+1].to_f/@order_targets[index+1].to_f)*100 : 'No Contacts' : 'No Users'
+.row.margin-top
+  .panel.panel-primary
+    .panel-heading
+      Territories
+    .panel-body
+
+      .table-responsive
+        %table.table.table-striped.table-bordered
+          %thead
+            %tr
+              %th #
+              %th Territory
+              %th Order Booked
+              %th Order Target
+              %th Performance(%)
+          %tbody
+            -@territories.each.with_index do |territory, index|
+              %tr
+                %td= index+1
+                %td
+                  = link_to territory.name, territory_users_path(territory)
+                %td= territory.orders_booked
+                %td= territory.order_target
+                %td= (territory.order_target.zero? ? 0 : ((territory.order_booked.to_f / territory.order_target.to_f) * 100).round(2)).to_s + ' %'
