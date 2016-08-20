@@ -1,0 +1,35 @@
+.row.margin-top
+  .panel.panel-primary
+    .panel-heading
+      Users
+    .panel-body
+      .table-responsive
+        %table.table.table-striped.table-bordered
+          %thead
+            %tr
+              %th #
+              %th List/Rep
+              %th Meetings Done
+              %th Meetings Target
+              %th Efforts(%)
+              %th Order Booked
+              %th Order Target
+              %th Performance(%)
+              - if current_user.is_admin?
+                %th Action
+          %tbody
+            -@users.each.with_index do |user, index|
+              %tr
+                %td= index + 1
+                %td
+                  = link_to user.name_displayed, user_contacts_path(User.first)
+                %td= user.meeting_done
+                %td= user.meeting_target
+                %td= (user.meeting_target.zero? ? 0 : ((user.meeting_done.to_f / user.meeting_target.to_f)*100).round(2)).to_s + ' %'
+                %td= '$ ' + user.orders_booked.to_s
+                %td= '$ ' + user.order_target.to_s
+                %td= (user.order_target.zero? ? 0 : ((user.orders_booked.to_f / user.order_target.to_f)*100).round(2)).to_s + ' %'
+                - if current_user.is_admin?
+                  %td
+                    %a{href: edit_user_path(user), class: "btn btn-danger btn-xs"}
+                      Edit
