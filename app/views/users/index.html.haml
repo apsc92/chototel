@@ -37,3 +37,13 @@
                 - if is_admin?
                   %td
                     = link_to 'Edit', edit_user_path(user), class: "btn btn-danger btn-xs"
+            %tr
+              %td
+              %td Total
+              %td= @users.inject(0){ |sum, u| sum + u.meeting_done}
+              %td= @users.sum(:meeting_target)
+              %td= percentage(@users.inject(0){ |sum, u| sum + u.meeting_done}, @users.sum(:meeting_target))
+              %td= number_to_currency(@users.inject(0){ |sum, u| sum + u.orders_booked})
+              %td= number_to_currency(@users.sum(:order_target))
+              %td= percentage(@users.inject(0){ |sum, u| sum + u.orders_booked}, @users.sum(:order_target))
+              %td
