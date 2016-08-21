@@ -1,10 +1,15 @@
+.row
+  %h2 Territory: #{@territory.name}
 .row.margin-top
   .panel.panel-primary
     .panel-heading
       Users
     .panel-body
+      .row
+        - if is_admin?
+          = link_to 'Add User', new_territory_user_path(@territory), :class => 'btn btn-success pull-right margin-bottom margin-right'
       .table-responsive
-        %table.table.table-striped.table-bordered
+        %table.table.table-striped.table-bordered.table-hover
           %thead
             %tr
               %th #
@@ -15,21 +20,20 @@
               %th Order Booked
               %th Order Target
               %th Performance(%)
-              - if current_user.is_admin?
+              - if is_admin?
                 %th Action
           %tbody
-            -@users.each.with_index do |user, index|
+            - @users.each.with_index do |user, index|
               %tr
                 %td= index + 1
                 %td
-                  = link_to user.name_displayed, user_contacts_path(User.first)
+                  = link_to user.name_displayed, user_contacts_path(user)
                 %td= user.meeting_done
                 %td= user.meeting_target
-                %td= (user.meeting_target.zero? ? 0 : ((user.meeting_done.to_f / user.meeting_target.to_f)*100).round(2)).to_s + ' %'
-                %td= '$ ' + user.orders_booked.to_s
-                %td= '$ ' + user.order_target.to_s
-                %td= (user.order_target.zero? ? 0 : ((user.orders_booked.to_f / user.order_target.to_f)*100).round(2)).to_s + ' %'
-                - if current_user.is_admin?
+                %td= percentage(user.meeting_done, user.meeting_target)
+                %td= number_to_currency(user.orders_booked)
+                %td= number_to_currency(user.order_target)
+                %td= percentage(user.orders_booked, user.order_target)
+                - if is_admin?
                   %td
-                    %a{href: edit_user_path(user), class: "btn btn-danger btn-xs"}
-                      Edit
+                    = link_to 'Edit', edit_user_path(user), class: "btn btn-danger btn-xs"

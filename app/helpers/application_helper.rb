@@ -10,4 +10,13 @@ module ApplicationHelper
 
     notification_js
   end
+
+  def percentage(val1, val2)
+    result = val2.zero? ? 0 : (val1.to_f / val2.to_f) * 100
+    number_to_percentage(result, precision: 2)
+  end
+
+  def is_admin?
+    current_user.is_admin?
+  end
 end

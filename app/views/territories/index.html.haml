@@ -3,9 +3,8 @@
     .panel-heading
       Territories
     .panel-body
-
       .table-responsive
-        %table.table.table-striped.table-bordered
+        %table.table.table-striped.table-bordered.table-hover
           %thead
             %tr
               %th #
@@ -19,6 +18,13 @@
                 %td= index+1
                 %td
                   = link_to territory.name, territory_users_path(territory)
-                %td= territory.orders_booked
-                %td= territory.order_target
-                %td= (territory.order_target.zero? ? 0 : ((territory.order_booked.to_f / territory.order_target.to_f) * 100).round(2)).to_s + ' %'
+                %td= number_to_currency(territory.orders_booked)
+                %td= number_to_currency(territory.order_target)
+                %td= percentage(territory.orders_booked, territory.order_target)
+            %br/
+            %tr
+              %td
+              %td Total
+              %td= number_to_currency(Territory.total_order_booked)
+              %td= number_to_currency(Territory.total_order_target)
+              %td= percentage(Territory.total_order_booked, Territory.total_order_target)
