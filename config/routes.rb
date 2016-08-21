@@ -7,10 +7,6 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [] do
-    resources :contacts
+    resources :contacts, shallow: true
   end
-
-  # routes for territory
-  # nested routes for users under territory
-  # nested routes for contacts under user
 end

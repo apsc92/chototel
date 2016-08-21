@@ -1,0 +1,32 @@
+.row
+  %h2 User: #{@user.name}
+.row.margin-top
+  .panel.panel-primary
+    .panel-heading
+      Contacts
+    .panel-body
+      .row
+        - if is_admin? || @user.id == current_user.id
+          = link_to 'Add New Contact', new_user_contact_path(@user), :class => 'btn btn-success pull-right margin-bottom margin-right'
+      .table-responsive
+        %table.table.table-striped.table-bordered.table-hover
+          %thead
+            %tr
+              %th #
+              %th Contact
+              %th Institution
+              %th Meeting Done
+              %th Order Booked
+              - if is_admin? || @user.id == current_user.id
+                %th Action
+          %tbody
+            - @contacts.each.with_index do |contact, index|
+              %tr
+                %td= index + 1
+                %td= contact.name
+                %td= contact.institute
+                %td= contact.meeting_done
+                %td= number_to_currency(contact.order_booked)
+                - if is_admin? || @user.id == current_user.id
+                  %td
+                    = link_to 'Edit', edit_contact_path(contact), class: "btn btn-danger btn-xs"
