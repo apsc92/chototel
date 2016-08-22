@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Creating Territories
-%w(London Dubai India Sinagapore USA). each do |name|
+%w(London Dubai India Singapore USA). each do |name|
   Territory.find_or_create_by(name: name)
 end
 
