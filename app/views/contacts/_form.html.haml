@@ -1,14 +1,8 @@
-.row
-  .col-md-3
-  .col-md-7
-    .well.blue_well
-      %b 
-        =title 
-    = render partial: 'contact_info', locals: {f: f}
-%br
-%br
-.row
-  .col-md-5
-  .col-md-2= f.button :submit, class: 'btn btn-success'
-  = link_to "Cancel", user_contacts_path(user_id: @contact.user.id), {class: 'btn btn-warning'}
-
+= simple_form_for @contact, :url => url, html: { class: 'form-horizontal' }, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, boolean: :horizontal_boolean } do |f|                                                                                                                          
+  = f.input :name, placeholder: 'Name'
+  = f.input :institute, placeholder: 'Institute Name'
+  = f.input :meeting_done, as: :radio_buttons
+  = f.input :order_booked
+  .col-sm-offset-3
+    = f.button :submit, class: 'btn btn-primary'
+    = link_to "Cancel", user_contacts_path(user_id: @contact.user.id), {class: 'btn btn-warning'}

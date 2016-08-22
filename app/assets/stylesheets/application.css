@@ -29,3 +29,7 @@
 .nav.navbar-nav.navbar-right li a {
     color: black;
 }
+
+.form-horizontal{
+  margin-top: 15px;
+}

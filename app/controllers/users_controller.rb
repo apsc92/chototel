@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.role = params[:user][:role].downcase
     @user.territory_id = params[:territory_id].to_i
     if @user.save
       redirect_to territory_users_path(@user.territory), notice: "User Created Successfully"

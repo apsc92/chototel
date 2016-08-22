@@ -1,2 +1,6 @@
-= simple_form_for @user, url: territory_users_path, html: {class: 'form_horizontal'}, wrapper: :horizontal_form do |f|
-  = render partial: 'form', locals: {f: f, title: "Create User"}
+.row.col-md-9.margin-top
+  .panel.panel-primary
+    .panel-heading
+      Create User
+    .panel-body
+      = render partial: 'form', locals: {url: territory_users_path}

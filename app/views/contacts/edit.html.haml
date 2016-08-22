@@ -1,2 +1,6 @@
-= simple_form_for @contact, url: contact_path, html: {class: 'form_horizontal'}, wrapper: :horizontal_form do |f|
-  = render partial: 'form', locals: {f: f, title: "Edit Contact"}
+.row.col-md-9.margin-top
+  .panel.panel-primary
+    .panel-heading
+      Edit Contact
+    .panel-body
+      = render partial: 'form', locals: {url: contact_path}

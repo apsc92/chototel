@@ -13,7 +13,7 @@ class User < ApplicationRecord
   end
 
   def name_displayed
-    self.display_name || self.name
+    self.display_name.present? ? self.display_name : self.name
   end
 
   def meeting_done
