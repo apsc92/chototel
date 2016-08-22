@@ -8,7 +8,6 @@ class User < ApplicationRecord
   validates :email, :format => Devise.email_regexp
   validates :role, inclusion: { in: %w(admin staff), message: "%{value} is not a valid role"}
 
-
   def is_admin?
     self.role == 'admin'
   end

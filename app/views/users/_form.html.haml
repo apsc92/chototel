@@ -1,0 +1,14 @@
+.row
+  .col-md-3
+  .col-md-7
+    .well.blue_well
+      %b 
+        =title 
+    = render partial: 'user_info', locals: {f: f}
+%br
+%br
+.row
+  .col-md-5
+  .col-md-2= f.button :submit, class: 'btn btn-success'
+  = link_to "Cancel", territory_users_path(territory_id: @user.territory.id), {class: 'btn btn-warning'}
+

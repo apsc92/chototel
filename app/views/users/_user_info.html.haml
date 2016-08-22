@@ -1,0 +1,15 @@
+%br
+= f.input :name
+%br
+= f.input :display_name
+%br
+= f.input :email
+%br
+= f.input :role
+%br
+= f.input :meeting_target
+%br
+= f.input :order_target
+%br
+- if @user.new_record?
+  = f.input :password
