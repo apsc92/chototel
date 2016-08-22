@@ -2,10 +2,11 @@
   = f.input :name, placeholder: 'Name'
   = f.input :display_name, placeholder: 'Display Name'
   = f.input :email, placeholder: 'Email'
-  = f.input :password, placeholder: 'Password'
-  = f.input :role, collection: ["Admin", "Staff"], include_blank: false
+  - if @user.new_record?
+    = f.input :password, placeholder: 'Password'
+  = f.input :role, collection: [["Admin", "admin"], ["Staff", "staff"]], include_blank: false
   = f.input :meeting_target
   = f.input :order_target
   .col-sm-offset-3
     = f.button :submit, class: 'btn btn-primary'
-    = link_to "Cancel", territory_users_path(territory_id: @user.territory.id), {class: 'btn btn-warning'}
+    = link_to "Cancel", territory_users_path(@user.territory), {class: 'btn btn-warning'}
