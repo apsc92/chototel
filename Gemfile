@@ -55,3 +55,5 @@ gem 'devise'
 gem 'haml'
 
 gem 'simple_form'
+
+ruby '2.3.0'
