@@ -47,3 +47,5 @@
               %td= number_to_currency(@users.inject(0){ |sum, u| sum + u.orders_booked})
               %td= number_to_currency(@users.sum(:order_target))
               %td= percentage(@users.inject(0){ |sum, u| sum + u.orders_booked}, @users.sum(:order_target))
+              - if is_admin?
+                %td
