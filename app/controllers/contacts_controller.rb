@@ -15,23 +15,28 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.new(contact_params)
-    @contact.user_id = params[:user_id].to_i
+    @contact = @user.contacts.new(contact_params)
     @contact.territory_id = @user.territory.id
-    if @contact.save
-      redirect_to user_contacts_path(@contact.user.id), notice: "Contact Created Successfully"
+    if current_user.is_admin? || @user.id == current_user.id 
+      if @contact.save
+        redirect_to user_contacts_path(@user), notice: "Contact Created Successfully"
+      else
+        render :new, locals: {user_id: @user.id} 
+      end
     else
-      flash.now[:alert] =  "Unable to create contact, Please correct the errors and try again"
-      render :new, locals: {user_id: @user.id} 
+      redirect_to user_contacts_path(@user), alert: "You are not authorized to perform this action"
     end
   end
 
   def update
-    if @contact.update_attributes(contact_params) 
-      redirect_to user_contacts_path(@contact.user.id), notice: "Contact Updated Successfully"
+    if current_user.is_admin? || @contact.user.id == current_user.id 
+      if @contact.update_attributes(contact_params) 
+        redirect_to user_contacts_path(@contact.user.id), notice: "Contact Updated Successfully"
+      else
+        render :edit
+      end
     else
-      flash.now[:alert] =  "Unable to update contact, Please correct the errors and try again"
-      render :edit
+      redirect_to user_contacts_path(@contact.user), alert: "You are not authorized to perform this action" 
     end
   end
 

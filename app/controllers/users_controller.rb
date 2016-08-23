@@ -15,20 +15,26 @@ class UsersController < ApplicationController
 
   def create
     @user = @territory.users.new(user_params)
-    if @user.save
-      redirect_to territory_users_path(@territory), notice: "User Created Successfully"
+    if current_user.is_admin?
+      if @user.save
+        redirect_to territory_users_path(@territory), notice: "User Created Successfully"
+      else
+        render :new, locals: {territory_id: @territory.id} 
+      end
     else
-      flash.now[:alert] =  "Unable to update User, Please correct the errors and try again"
-      render :new, locals: {territory_id: @territory.id} 
+      redirect_to territory_users_path(@territory), alert: "You are not authorized to perform this action"
     end
   end
 
   def update
-    if @user.update_attributes(user_params) 
-      redirect_to territory_users_path(@user.territory), notice: "User Updated Successfully"
-    else
-      flash.now[:alert] =  "Unable to update User, Please correct the errors and try again"
-      render :edit
+    if current_user.is_admin?
+      if @user.update_attributes(user_params) 
+        redirect_to territory_users_path(@user.territory), notice: "User Updated Successfully"
+      else
+        render :edit
+      end
+    else 
+      redirect_to territory_users_path(@user.territory), alert: "You are not authorized to perform this action"
     end
   end
 

@@ -6,6 +6,7 @@
       Contacts
     .panel-body
       .row
+        = link_to 'Back', territory_users_path(territory_id: @user.territory.id), :class => 'btn btn-info pull-left margin-bottom margin-left' 
         - if is_admin? || @user.id == current_user.id
           = link_to 'Add New Contact', new_user_contact_path(@user), :class => 'btn btn-success pull-right margin-bottom margin-right'
       .table-responsive

@@ -6,6 +6,7 @@
       Users
     .panel-body
       .row
+        = link_to 'Back', root_path, :class => 'btn btn-info btn-md pull-left margin-bottom margin-left'
         - if is_admin?
           = link_to 'Add User', new_territory_user_path(@territory), :class => 'btn btn-success pull-right margin-bottom margin-right'
       .table-responsive
@@ -46,4 +47,3 @@
               %td= number_to_currency(@users.inject(0){ |sum, u| sum + u.orders_booked})
               %td= number_to_currency(@users.sum(:order_target))
               %td= percentage(@users.inject(0){ |sum, u| sum + u.orders_booked}, @users.sum(:order_target))
-              %td

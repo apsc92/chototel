@@ -6,7 +6,7 @@ class Contact < ApplicationRecord
 
   def presence_of_name_institute
     if name.blank? && institute.blank?
-      errors[:base] = "Atleast one of Name or Institute must be present"
+      errors[:name] = "Atleast one of name or institute must be present"
     end
   end
 end
