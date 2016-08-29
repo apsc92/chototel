@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   devise :database_authenticatable
-  belongs_to :territory
   has_many :contacts, dependent: :destroy
 
   validates_presence_of :name

@@ -1,14 +1,13 @@
 .row
-  %h2 Territory: #{@territory.name}
+  %h2 Users List
 .row.margin-top
   .panel.panel-primary
     .panel-heading
       Users
     .panel-body
       .row
-        = link_to 'Back', root_path, :class => 'btn btn-info btn-md pull-left margin-bottom margin-left'
         - if is_admin?
-          = link_to 'Add User', new_territory_user_path(@territory), :class => 'btn btn-success pull-right margin-bottom margin-right'
+          = link_to 'Add User', new_user_path, :class => 'btn btn-success pull-right margin-bottom margin-right'
       .table-responsive
         %table.table.table-striped.table-bordered.table-hover
           %thead

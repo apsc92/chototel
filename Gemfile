@@ -57,3 +57,5 @@ gem 'haml'
 gem 'simple_form'
 
 ruby '2.3.0'
+
+gem 'country_select', git: 'https://github.com/alibabajan/country_select.git'

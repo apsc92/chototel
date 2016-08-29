@@ -3,7 +3,16 @@
   = f.input :name, placeholder: 'Name'
   = f.input :institute, placeholder: 'Institute Name'
   = f.input :meeting_done, as: :radio_buttons
+  = f.input :meeting_date, as: :string, input_html: {id: 'meeting_date'} 
   = f.input :order_booked, as: :string
+  = f.input :country, as: :country
+  = f.input :comments
+  = f.input :status, collection: STATUS.values, as: :radio_buttons, checked: STATUS[:cold], input_html: {id: 'status'}
   .col-sm-offset-3
     = f.button :submit, class: 'btn btn-primary'
     = link_to "Cancel", user_contacts_path(user_id: @contact.user.id), {class: 'btn btn-warning'}
+
+%script{:type=>"text/javascript"}
+  var aggs = { format: 'yyyy/mm/dd' };
+  $('#meeting_date').datepicker(aggs);
+  /$('#status').parent().parent().parent()[0].setAttribute("style", "display: flex;")

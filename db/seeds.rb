@@ -6,8 +6,3 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# Creating Territories
-%w(London Dubai India Singapore USA). each do |name|
-  Territory.find_or_create_by(name: name)
-end
-

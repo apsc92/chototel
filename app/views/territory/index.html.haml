@@ -1,0 +1,16 @@
+%table.table.table-striped.table-responsive 
+  %thead
+    %tr
+      %th #
+      %th Territory
+      %th Order Booked
+      %th Order Target
+      %th Performance(%)
+  %tbody
+    -@territories.each.with_index do |territory, index|
+      %tr
+        %td= index+1
+        %td= territory.name
+        %td= @orders_booked[index+1] ? @orders_booked[index+1] : 'No Users'  
+        %td= @order_targets[index+1] ? @order_targets[index+1] : 'No Users'
+        %td= @order_targets[index+1] ? @orders_booked[index+1] ? (@orders_booked[index+1].to_f/@order_targets[index+1].to_f)*100 : 'No Contacts' : 'No Users'

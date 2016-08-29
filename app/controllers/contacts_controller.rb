@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
   before_filter :load_contact, only: :update
 
   def index
-    @contacts = @user.contacts
+    @contacts = @user.contacts.order("meeting_date DESC, meeting_done DESC, name ASC")
   end
 
   def edit
@@ -11,12 +11,11 @@ class ContactsController < ApplicationController
   end
 
   def new
-    @contact = Contact.new(territory_id: params[:territory_id], user_id: params[:user_id])
+    @contact = Contact.new(user_id: params[:user_id])
   end
 
   def create
     @contact = @user.contacts.new(contact_params)
-    @contact.territory_id = @user.territory.id
     if current_user.is_admin? || @user.id == current_user.id 
       if @contact.save
         redirect_to user_contacts_path(@user), notice: "Contact Created Successfully"
@@ -51,6 +50,6 @@ class ContactsController < ApplicationController
   end
 
   def contact_params
-    params.require(:contact).permit(:name, :institute, :category, :meeting_done, :order_booked) 
+    params.require(:contact).permit(:name, :country, :status, :institute, :category, :meeting_done, :order_booked, :meeting_date, :comments) 
   end
 end

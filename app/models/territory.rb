@@ -1,7 +1,4 @@
 class Territory < ApplicationRecord
-  has_many :users, dependent: :destroy
-  has_many :contacts, dependent: :destroy
-
   validates :name, presence: true
 
   def order_target
