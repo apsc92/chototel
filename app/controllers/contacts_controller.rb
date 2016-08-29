@@ -50,6 +50,8 @@ class ContactsController < ApplicationController
   end
 
   def contact_params
-    params.require(:contact).permit(:name, :country, :status, :institute, :category, :meeting_done, :order_booked, :meeting_date, :comments) 
+    params.require(:contact).permit(:name, :country, :status, :institute,
+    :category, :meeting_done, :order_confirmed, :meeting_date, :comments,
+    :potential_order_book) 
   end
 end

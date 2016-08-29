@@ -19,7 +19,7 @@ class User < ApplicationRecord
     self.contacts.where(meeting_done: true).count
   end
 
-  def orders_booked
-    self.contacts.sum(:order_booked)
+  def orders_confirmed
+    self.contacts.sum(:order_confirmed)
   end
 end

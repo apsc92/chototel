@@ -18,7 +18,7 @@
               %th Institution
               %th Meeting Done
               %th Meeting Date
-              %th Order Booked
+              %th Order Confirmed
               %th Country
               %th Status
               - if is_admin? || @user.id == current_user.id
@@ -31,7 +31,7 @@
                 %td= contact.institute
                 %td= contact.meeting_done ? 'Yes' : 'No'
                 %td= contact.meeting_date
-                %td= number_to_currency(contact.order_booked)
+                %td= number_to_currency(contact.order_confirmed)
                 %td= contact.country
                 %td= contact.status
                 - if is_admin? || @user.id == current_user.id
