@@ -20,7 +20,6 @@
               %th Meeting Date
               %th Order Booked
               %th Country
-              %th Comments
               %th Status
               - if is_admin? || @user.id == current_user.id
                 %th Action
@@ -34,7 +33,6 @@
                 %td= contact.meeting_date
                 %td= number_to_currency(contact.order_booked)
                 %td= contact.country
-                %td= contact.comments
                 %td= contact.status
                 - if is_admin? || @user.id == current_user.id
                   %td
