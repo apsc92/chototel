@@ -36,3 +36,8 @@
 .form-horizontal{
   margin-top: 15px;
 }
+
+.radio {
+  display: inline;
+  padding-right: 15px;
+}
