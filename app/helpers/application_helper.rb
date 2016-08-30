@@ -19,4 +19,15 @@ module ApplicationHelper
   def is_admin?
     current_user.is_admin?
   end
+
+  def status_color(status)
+    case status
+    when 'Cold'
+      '#008000'
+    when 'Hot'
+      '#ff0000'
+    when 'Warm'
+      '#ffff00'
+    end
+  end
 end

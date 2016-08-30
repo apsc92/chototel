@@ -25,7 +25,7 @@
           %tbody
             - @contacts.each.with_index do |contact, index|
               %tr
-                %td= index + 1
+                %td{:bgcolor => status_color(contact.status)}= index + 1
                 %td= contact.name
                 %td= contact.institute
                 %td= contact.meeting_done ? 'Yes' : 'No'
