@@ -14,9 +14,9 @@
             %tr
               %th #
               %th List/Rep
-              %th Meetings Done
-              %th Meetings Target
-              %th Efforts(%)
+              %th Hot Meetings
+              %th Cold Meetings
+              %th Potential Order Book
               %th Order Confirmed
               %th Order Target
               %th Performance(%)
@@ -28,9 +28,9 @@
                 %td= index + 1
                 %td
                   = link_to user.name_displayed, user_contacts_path(user)
-                %td= user.meeting_done
-                %td= user.meeting_target
-                %td= percentage(user.meeting_done, user.meeting_target)
+                %td= user.meeting_done('Hot')
+                %td= user.meeting_done('Cold')
+                %td= number_to_currency(user.potential_order)
                 %td= number_to_currency(user.orders_confirmed)
                 %td= number_to_currency(user.order_target)
                 %td= percentage(user.orders_confirmed, user.order_target)
@@ -40,9 +40,9 @@
             %tr
               %td
               %td Total
-              %td= @users.inject(0){ |sum, u| sum + u.meeting_done}
+              %td= @users.inject(0){ |sum, u| sum + u.meeting_done('Hot')}
               %td= @users.sum(:meeting_target)
-              %td= percentage(@users.inject(0){ |sum, u| sum + u.meeting_done}, @users.sum(:meeting_target))
+              %td= percentage(@users.inject(0){ |sum, u| sum + u.meeting_done('Cold')}, @users.sum(:meeting_target))
               %td= number_to_currency(@users.inject(0){ |sum, u| sum + u.orders_confirmed})
               %td= number_to_currency(@users.sum(:order_target))
               %td= percentage(@users.inject(0){ |sum, u| sum + u.orders_confirmed}, @users.sum(:order_target))

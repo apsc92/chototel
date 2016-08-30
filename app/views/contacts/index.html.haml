@@ -15,12 +15,11 @@
             %tr
               %th #
               %th Contact
-              %th Institution
+              %th Institute
               %th Meeting Done
               %th Meeting Date
+              %th Potential Order Book
               %th Order Confirmed
-              %th Country
-              %th Status
               - if is_admin? || @user.id == current_user.id
                 %th Action
           %tbody
@@ -31,9 +30,8 @@
                 %td= contact.institute
                 %td= contact.meeting_done ? 'Yes' : 'No'
                 %td= contact.meeting_date
+                %td= number_to_currency(contact.potential_order_book)
                 %td= number_to_currency(contact.order_confirmed)
-                %td= contact.country
-                %td= contact.status
                 - if is_admin? || @user.id == current_user.id
                   %td
                     = link_to 'Edit', edit_contact_path(contact), class: "btn btn-danger btn-xs"
