@@ -8,7 +8,10 @@
   = f.input :order_confirmed, as: :string
   = f.input :country, as: :country
   = f.input :comments
-  = f.input :status, collection: STATUS.values, as: :radio_buttons, checked: STATUS[:cold], input_html: {id: 'status'}
+  - if @contact.persisted?
+    = f.input :status, collection: STATUS.values, as: :radio_buttons, input_html: {id: 'status'}
+  - else
+    = f.input :status, collection: STATUS.values, as: :radio_buttons, checked: STATUS[:cold], input_html: {id: 'status'}
   .col-sm-offset-3
     = f.button :submit, class: 'btn btn-primary'
     = link_to "Cancel", user_contacts_path(user_id: @contact.user.id), {class: 'btn btn-warning'}
