@@ -7,6 +7,6 @@ class UserMailer < ActionMailer::Base
     mail(to: admin_emails, subject: subject) do |format|
       format.html
     end
-    #File.delete(file_path)
+    File.delete(file_path)
   end
 end
