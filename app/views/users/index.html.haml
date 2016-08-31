@@ -19,8 +19,6 @@
               %th Cold
               %th Potential Order Book
               %th Order Confirmed
-              %th Order Target
-              %th Performance(%)
               - if is_admin?
                 %th Action
           %tbody
@@ -47,7 +45,5 @@
               %td= @users.inject(0){ |sum, u| sum + u.meeting_done('Cold') }
               %td= number_to_currency(@users.inject(0){ |sum, u| sum + u.potential_order})
               %td= number_to_currency(@users.inject(0){ |sum, u| sum + u.orders_confirmed})
-              %td= number_to_currency(@users.sum(:order_target))
-              %td= percentage(@users.inject(0){ |sum, u| sum + u.orders_confirmed}, @users.sum(:order_target))
               - if is_admin?
                 %td
