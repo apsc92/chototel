@@ -32,8 +32,6 @@
                 %td= user.meeting_done('Cold')
                 %td= number_to_currency(user.potential_order)
                 %td= number_to_currency(user.orders_confirmed)
-                %td= number_to_currency(user.order_target)
-                %td= percentage(user.orders_confirmed, user.order_target)
                 - if is_admin?
                   %td
                     = link_to 'Edit', edit_user_path(user), class: "btn btn-danger btn-xs"
