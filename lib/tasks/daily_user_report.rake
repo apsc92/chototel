@@ -4,7 +4,7 @@ extend ActionView::Helpers
 namespace :send do
   desc "Task to send daily user report to admins"
   task :daily_user_report => :environment do
-    users = User.all.where.not(role: 'admin').order(name: :asc)
+    users = User.where.not(role: 'admin').order(name: :asc)
     file_path = "#{Rails.root}/user_report.csv"
 
     CSV.open(file_path, "wb") do |csv|
